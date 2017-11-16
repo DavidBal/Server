@@ -1,10 +1,10 @@
-package events;
+package routes;
 
 import server.FileTransfer;
 
-public class EventFile extends Event {
+public class RouterFile extends Router {
 
-	public EventFile(String url) {
+	public RouterFile(String url) {
 		super(url);
 		// TODO Auto-generated constructor stub
 	}

@@ -18,6 +18,14 @@ public class FileTransfer {
 		return this.file.length();
 	}
 
+	public String getFilePath() {
+		return this.file.getPath();
+	}
+
+	public boolean isFileReadable() {
+		return this.file.exists() && this.file.canRead() && this.file.isFile();
+	}
+
 	public void sendFile(PrintWriter out) throws IOException {
 		BufferedReader fileIn = new BufferedReader(new FileReader(this.file));
 

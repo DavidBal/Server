@@ -1,7 +1,7 @@
 package main;
 
-import events.EventFile;
-import events.EventManager;
+import routes.RouterFile;
+import routes.RouterManager;
 import server.ServerMainThread;
 
 public class Main {
@@ -10,9 +10,9 @@ public class Main {
 
 		System.out.println("Main Running");
 
-		EventManager eventManager = new EventManager();
+		RouterManager eventManager = new RouterManager();
 		
-		eventManager.registerEvent(new EventFile("/text"));
+		eventManager.registerEvent(new RouterFile("/text"));
 
 		ServerMainThread smt = new ServerMainThread(8080, eventManager);
 		Thread serverMainThread = new Thread(smt);

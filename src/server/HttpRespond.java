@@ -65,9 +65,15 @@ public class HttpRespond {
 	private FileTransfer file = null;
 
 	public void addContent(FileTransfer file) {
-		this.contentLength += file.getFileSize();
-
-		this.file = file;
+		if (file.isFileReadable() == false) {
+			this.setStatusCode(500);
+			this.contentLength = 0;
+			//TODO better Error Mangment
+			System.out.println("Error - Send file " + file.getFilePath() +  " failed!");
+		} else {
+			this.contentLength += file.getFileSize();
+			this.file = file;
+		}
 	}
 
 	public void send() {
@@ -81,7 +87,6 @@ public class HttpRespond {
 		this.out.println("Content-Type: " + this.contentType + "; charset=UTF-8");
 		this.out.println("Connection: Closed");
 		// Marks the End of the Header
-		this.out.println();
 		this.out.println();
 		// Content
 		for (String s : this.content) {

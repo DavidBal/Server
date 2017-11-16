@@ -27,22 +27,24 @@ public class HttpRequest {
 	private String extractUrlParameter(String url) {
 		// rename
 		System.out.println(url);
-		
-		String[] up = url.split("\\?");
 
-		String[] param = up[1].split("\\&");
+		if (url.contains("\\?")) {
+			String[] up = url.split("\\?");
 
-		for (int i = 0; i < param.length; i++) {
-			String[] tmp = param[i].split("\\=");
-			parameter.put(tmp[0], tmp[1]);
+			String[] param = up[1].split("\\&");
+
+			for (int i = 0; i < param.length; i++) {
+				String[] tmp = param[i].split("\\=");
+				parameter.put(tmp[0], tmp[1]);
+			}
+			return up[0];
 		}
-
-		return up[0];
+		return url;
 	}
 
 	public String toString() {
 		String s = "RequestMethode: " + this.requestMethod + "; Url: " + this.url + "\n";
-		
+
 		s += "Parameter: " + this.parameter.toString() + "\n";
 
 		return s;

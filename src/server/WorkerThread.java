@@ -6,19 +6,20 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import events.Event;
-import events.EventManager;
+import routes.AutoPublish;
+import routes.Router;
+import routes.RouterManager;
 
 public class WorkerThread implements Runnable {
 
 	Socket socket;
 
-	EventManager eventManager;
+	RouterManager eventManager;
 
 	BufferedReader in;
 	PrintWriter out;
 
-	public WorkerThread(Socket socket, EventManager eventManager) throws IOException {
+	public WorkerThread(Socket socket, RouterManager eventManager) throws IOException {
 		this.socket = socket;
 		this.eventManager = eventManager;
 
@@ -37,6 +38,8 @@ public class WorkerThread implements Runnable {
 
 		try {
 			tmp = this.in.readLine();
+			
+			System.out.println(tmp);
 
 			split = tmp.split(" ");
 
@@ -45,9 +48,11 @@ public class WorkerThread implements Runnable {
 			HttpRespond httpRespond = new HttpRespond(this.out);
 			System.out.println(httpreq.toString());
 
-			Event e = this.eventManager.findEvent(httpreq.getURL());
-			e.runEvent(httpreq, httpRespond);
-
+			//Wenn autoPublish nicht funktioniert checke Router
+			if(AutoPublish.autoPublish(httpreq, httpRespond) == false) {
+				Router e = this.eventManager.findEvent(httpreq.getURL());
+				e.runEvent(httpreq, httpRespond);
+			}
 			httpRespond.send();
 
 		} catch (IOException e1) {

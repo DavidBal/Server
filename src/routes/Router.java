@@ -1,9 +1,9 @@
-package events;
+package routes;
 
 import server.HttpRequest;
 import server.HttpRespond;
 
-public abstract class Event {
+public abstract class Router {
 
 	/**
 	 * @description The URL that this event is linked to
@@ -29,7 +29,7 @@ public abstract class Event {
 	 * 
 	 * @param url
 	 */
-	protected Event(String url) {
+	protected Router(String url) {
 		this.url = url;
 	}
 

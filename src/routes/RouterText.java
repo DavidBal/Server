@@ -1,11 +1,11 @@
-package events;
+package routes;
 
 import server.HttpRequest;
 import server.HttpRespond;
 
-public class EventText extends Event {
+public class RouterText extends Router {
 	
-	public EventText(String url) {
+	public RouterText(String url) {
 		super(url);
 		// TODO Auto-generated constructor stub
 	}
@@ -21,6 +21,8 @@ public class EventText extends Event {
 		httpRespond.addContent("<html>");
 		httpRespond.addContent("<head>");
 		httpRespond.addContent("<title>404 Not Found</title>");
+		httpRespond.addContent("<link rel=\"stylesheet\" type=\"text/css\" href=\"test.css\">");
+		httpRespond.addContent("<script src=\"test.js\"></script>");
 		httpRespond.addContent("</head>");
 		httpRespond.addContent("<body>");
 		httpRespond.addContent("<h1>Not Found</h1>");
@@ -28,11 +30,4 @@ public class EventText extends Event {
 		httpRespond.addContent("</body>");
 		httpRespond.addContent("</html>");
 	};
-
-	public void runEvent(HttpRequest httpRequest, HttpRespond httpRespond) {
-		this.httpRequest = httpRequest;
-		this.httpRespond = httpRespond;
-
-		this.task();
-	}
 }

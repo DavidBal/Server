@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import events.EventManager;
+import routes.RouterManager;
 
 public class ServerMainThread implements Runnable {
 
@@ -12,9 +12,9 @@ public class ServerMainThread implements Runnable {
 	
 	boolean exit;
 	
-	EventManager eventManager;
+	RouterManager eventManager;
 	
-	public ServerMainThread(int port, EventManager eventManager) {
+	public ServerMainThread(int port, RouterManager eventManager) {
 		this.port = port;
 		this.exit = false;
 		this.eventManager = eventManager;

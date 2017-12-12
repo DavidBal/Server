@@ -1,5 +1,7 @@
 package server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.LinkedHashMap;
 
 public class HttpRequest {
@@ -17,6 +19,31 @@ public class HttpRequest {
 		this.requestMethod = requestMethod;
 
 		this.url = this.extractUrlParameter(url);
+	}
+
+	public static HttpRequest createRequest(BufferedReader reader) throws IOException {
+		String tmp = "";
+		String[] split;
+
+		// GET/POST url HTTP/1.1
+		tmp = reader.readLine();
+
+		split = tmp.split(" ");
+
+		while (tmp.isEmpty() == false) {
+			tmp = reader.readLine();
+			
+			System.out.println(tmp);
+			System.out.println(tmp.isEmpty());
+		}
+
+		
+		System.out.println("Ende des Reads!!");
+		
+		HttpRequest req = new HttpRequest(split[0], split[1]);
+
+		return req;
+
 	}
 
 	/**

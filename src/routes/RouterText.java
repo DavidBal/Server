@@ -1,8 +1,5 @@
 package routes;
 
-import server.HttpRequest;
-import server.HttpRespond;
-
 public class RouterText extends Router {
 	
 	public RouterText(String url) {

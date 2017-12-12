@@ -1,5 +1,7 @@
 package server;
 
+import java.io.File;
+
 /**
  * 
  * @author davidbaldauf
@@ -7,6 +9,13 @@ package server;
  */
 public class ServerManager {
 	
-	
+	public void buildEnvironment() {
+		File pub = new File("public");
+		if(pub.isDirectory() == false) {
+			pub.mkdirs();
+		}
+		
+		
+	}
 	
 }

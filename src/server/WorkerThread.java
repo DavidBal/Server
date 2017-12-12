@@ -37,19 +37,13 @@ public class WorkerThread implements Runnable {
 		// First Line
 
 		try {
-			tmp = this.in.readLine();
-			
-			System.out.println(tmp);
-
-			split = tmp.split(" ");
-
-			httpreq = new HttpRequest(split[0], split[1]);
+			httpreq = HttpRequest.createRequest(this.in);
 
 			HttpRespond httpRespond = new HttpRespond(this.out);
 			System.out.println(httpreq.toString());
 
-			//Wenn autoPublish nicht funktioniert checke Router
-			if(AutoPublish.autoPublish(httpreq, httpRespond) == false) {
+			// Wenn autoPublish nicht funktioniert checke Router
+			if (AutoPublish.autoPublish(httpreq, httpRespond) == false) {
 				Router e = this.eventManager.findEvent(httpreq.getURL());
 				e.runEvent(httpreq, httpRespond);
 			}
